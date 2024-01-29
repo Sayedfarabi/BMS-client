@@ -1,7 +1,7 @@
 import { Col, Row } from "antd";
 import BMSForm from "../components/form/BMSForm";
 import BMSInput from "../components/form/BMSInput";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useLoginMutation } from "../redux/features/auth/authApi";
 import { useAppDispatch } from "../redux/hooks";
 import { setUser } from "../redux/features/auth/authSlice";
@@ -9,6 +9,7 @@ import { verifyToken } from "../utils/verifyToken";
 
 const Login = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const [login, { error }] = useLoginMutation();
 
   if (error) {
@@ -30,7 +31,9 @@ const Login = () => {
     const res = await login(userInfo).unwrap();
     const userData = verifyToken(res.data?.accessToken);
     dispatch(setUser({ user: userData, token: res.data?.accessToken }));
+    navigate("/");
   };
+
   return (
     <section style={{ background: "#001529", color: "white" }}>
       <Row justify="center" align="middle" style={{ minHeight: "100vh" }}>

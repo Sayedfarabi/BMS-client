@@ -75,6 +75,7 @@ const items: MenuProps["items"] = [
     label: <Logout />,
   },
 ];
+
 const MainLayout = () => {
   const token = useAppSelector(useCurrentToken);
 
