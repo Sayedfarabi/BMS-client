@@ -10,7 +10,13 @@ const Login = () => {
   return (
     <section style={{ background: "#001529", color: "white" }}>
       <Row justify="center" align="middle" style={{ minHeight: "100vh" }}>
-        <div>
+        <div
+          style={{
+            padding: "20px",
+            border: "2px solid white",
+            borderRadius: "12px",
+          }}
+        >
           <div style={{ margin: "28px 0px" }}>
             <h1
               style={{
@@ -40,7 +46,7 @@ const Login = () => {
                   name={"password"}
                   type={"password"}
                   label={"Password"}
-                  isRequired
+                  isRequired="required"
                 />
               </Col>
             </Row>

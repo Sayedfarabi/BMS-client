@@ -19,9 +19,9 @@ const BMSForm = ({ onSubmit, btn, children, defaultValues }: TBMSProps) => {
         <div style={{ textAlign: "right" }}>
           <button
             style={{
-              padding: "6px 12px",
+              padding: "6px 20px",
               cursor: "pointer",
-              background: "#8959f0",
+              backgroundImage: "linear-gradient(to right, #482c7a, #836cad)",
               borderRadius: "4px",
               color: "wheat",
             }}

@@ -13,7 +13,13 @@ const Register = () => {
       style={{ background: "#001529", color: "white", padding: "0px 20px" }}
     >
       <Row justify="center" align="middle" style={{ minHeight: "100vh" }}>
-        <div>
+        <div
+          style={{
+            padding: "20px",
+            border: "2px solid white",
+            borderRadius: "12px",
+          }}
+        >
           <div style={{ margin: "28px 0px" }}>
             <h1
               style={{
