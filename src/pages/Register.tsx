@@ -32,7 +32,7 @@ const Register = () => {
             </h1>
           </div>
 
-          <BMSForm onSubmit={onSubmit} btn={"Register"}>
+          <BMSForm onSubmit={onSubmit} btn={"Register"} isGhost>
             <Row gutter={24}>
               <Col span={12}>
                 <BMSInput
