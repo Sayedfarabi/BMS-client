@@ -1,9 +1,12 @@
-import { Layout, Menu, MenuProps } from "antd";
+import { Avatar, Dropdown, Layout, Menu, MenuProps, Space } from "antd";
 import { NavLink, Outlet } from "react-router-dom";
-
+import { UserOutlined } from "@ant-design/icons";
+import Logout from "../auth/Logout";
+import { useAppSelector } from "../../redux/hooks";
+import { useCurrentToken } from "../../redux/features/auth/authSlice";
 const { Content, Footer, Header, Sider } = Layout;
 
-const items: MenuProps["items"] = [
+const sidebarItems: MenuProps["items"] = [
   {
     key: "Dashboard",
     label: (
@@ -51,8 +54,30 @@ const items: MenuProps["items"] = [
     ],
   },
 ];
-
+const items: MenuProps["items"] = [
+  {
+    key: "1",
+    label: (
+      <NavLink
+        style={{ fontWeight: "bold", textAlign: "center", fontSize: "1rem" }}
+        to={""}
+      >
+        User Name
+      </NavLink>
+    ),
+  },
+  {
+    key: "2",
+    label: <NavLink to={""}>Profile</NavLink>,
+  },
+  {
+    key: "3",
+    label: <Logout />,
+  },
+];
 const MainLayout = () => {
+  const token = useAppSelector(useCurrentToken);
+
   return (
     <Layout style={{ height: "100vh" }}>
       <Sider
@@ -84,11 +109,45 @@ const MainLayout = () => {
           theme="dark"
           mode="inline"
           defaultSelectedKeys={["4"]}
-          items={items}
+          items={sidebarItems}
         />
       </Sider>
       <Layout>
-        <Header style={{ padding: 0 }} />
+        <Header style={{ padding: "0px 28px", color: "white" }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "end",
+              alignItems: "center",
+            }}
+          >
+            <div style={{ display: "flex" }}>
+              {/* <div style={{ margin: "0px 12px" }}>
+                <h1>Log in</h1>
+              </div>
+              <div style={{ margin: "0px 12px" }}>
+                <h1>Log out</h1>
+              </div> */}
+              <Space direction="horizontal" size={16}>
+                {token ? (
+                  <Space wrap size={16}>
+                    <Dropdown
+                      menu={{ items }}
+                      placement="bottom"
+                      arrow={{ pointAtCenter: true }}
+                    >
+                      <Avatar size={64} icon={<UserOutlined />} />
+                    </Dropdown>
+                  </Space>
+                ) : (
+                  <Space wrap size={16}>
+                    <p>Log in</p>
+                  </Space>
+                )}
+              </Space>
+            </div>
+          </div>
+        </Header>
         <Content style={{ margin: "24px 16px 0" }}>
           <div
             style={{
