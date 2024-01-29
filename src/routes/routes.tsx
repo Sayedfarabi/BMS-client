@@ -7,6 +7,7 @@ import Contact from "../pages/Contact";
 import { adminPaths } from "./admin.routes";
 import { sellerPaths } from "./seller.routes";
 import { buyerPaths } from "./buyer.routes";
+import ProtectedRoute from "../components/layout/ProtectedRoute";
 
 const router = createBrowserRouter([
   {
@@ -25,17 +26,29 @@ const router = createBrowserRouter([
   },
   {
     path: "/admin",
-    element: <App />,
+    element: (
+      <ProtectedRoute>
+        <App />
+      </ProtectedRoute>
+    ),
     children: adminPaths,
   },
   {
     path: "/seller",
-    element: <App />,
+    element: (
+      <ProtectedRoute>
+        <App />
+      </ProtectedRoute>
+    ),
     children: sellerPaths,
   },
   {
     path: "/buyer",
-    element: <App />,
+    element: (
+      <ProtectedRoute>
+        <App />
+      </ProtectedRoute>
+    ),
     children: buyerPaths,
   },
   {

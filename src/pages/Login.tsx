@@ -30,8 +30,6 @@ const Login = () => {
     const res = await login(userInfo).unwrap();
     const userData = verifyToken(res.data?.accessToken);
     dispatch(setUser({ user: userData, token: res.data?.accessToken }));
-
-    console.log(res);
   };
   return (
     <section style={{ background: "#001529", color: "white" }}>
