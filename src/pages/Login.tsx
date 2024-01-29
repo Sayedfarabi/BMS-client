@@ -4,8 +4,10 @@ import BMSInput from "../components/form/BMSInput";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useLoginMutation } from "../redux/features/auth/authApi";
 import { useAppDispatch } from "../redux/hooks";
-import { setUser } from "../redux/features/auth/authSlice";
+import { TUser, setUser } from "../redux/features/auth/authSlice";
 import { verifyToken } from "../utils/verifyToken";
+import { toast } from "sonner";
+import { FieldValues } from "react-hook-form";
 
 const Login = () => {
   const dispatch = useAppDispatch();
@@ -17,21 +19,27 @@ const Login = () => {
   }
 
   const defaultValue = {
-    email: "john2.sayed@example.com",
+    email: "abu.sayed123@gmail.com",
     password: "securePassword123",
   };
 
-  const onSubmit = async (data: Record<string, unknown>) => {
-    const { email, password } = data;
-    const userInfo = {
-      email: email,
-      password: password,
-    };
-    console.log(userInfo);
-    const res = await login(userInfo).unwrap();
-    const userData = verifyToken(res.data?.accessToken);
-    dispatch(setUser({ user: userData, token: res.data?.accessToken }));
-    navigate("/");
+  const onSubmit = async (data: FieldValues) => {
+    const toastId = toast.loading("Logging in...");
+    try {
+      const { email, password } = data;
+      const userInfo = {
+        email: email,
+        password: password,
+      };
+      const res = await login(userInfo).unwrap();
+      const user = verifyToken(res.data?.accessToken) as TUser;
+      dispatch(setUser({ user: user, token: res.data?.accessToken }));
+      navigate(`/${user.role}/dashboard`);
+      toast.success("Login successfully", { id: toastId, duration: 2000 });
+    } catch (error) {
+      toast.error("Somethig went wrong!", { id: toastId, duration: 2000 });
+      console.log(error);
+    }
   };
 
   return (
