@@ -5,17 +5,12 @@ import BMSInput from "../components/form/BMSInput";
 import BMSRadio from "../components/form/BMSRadio";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useCreateSellerMutation } from "../redux/features/register/registerApi";
-import Loading from "./Loading";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
 
 const Register = () => {
-  const [createSeller, { isLoading }] = useCreateSellerMutation();
+  const [createSeller] = useCreateSellerMutation();
   const navigate = useNavigate();
-
-  if (isLoading) {
-    <Loading color="white" />;
-  }
 
   const onSubmit = async (data: FieldValues) => {
     const toastId = toast.loading("Creating user...");

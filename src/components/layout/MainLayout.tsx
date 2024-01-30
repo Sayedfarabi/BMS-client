@@ -24,6 +24,10 @@ const sidebarItems: MenuProps["items"] = [
         label: <NavLink to={"/admin/create-product"}>Create Product</NavLink>,
       },
       {
+        key: "Product Inventory",
+        label: <NavLink to={"/admin/inventory"}>Product Inventory</NavLink>,
+      },
+      {
         key: "Create Seller",
         label: <NavLink to={"/admin/create-seller"}>Create Seller</NavLink>,
       },

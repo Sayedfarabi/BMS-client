@@ -14,7 +14,14 @@ const createProductApi = baseApi.injectEndpoints({
         };
       },
     }),
+    products: builder.query({
+      query: () => {
+        return {
+          url: "/inventory/",
+        };
+      },
+    }),
   }),
 });
 
-export const { useCreateProductMutation } = createProductApi;
+export const { useCreateProductMutation, useProductsQuery } = createProductApi;

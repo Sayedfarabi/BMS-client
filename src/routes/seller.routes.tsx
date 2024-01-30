@@ -1,5 +1,5 @@
-import Inventory from "../pages/seller/Inventory";
 import SellerDashboard from "../pages/seller/SellerDashboard";
+import SellerInventory from "../pages/seller/SellerInventory";
 
 export const sellerPaths = [
   {
@@ -12,6 +12,6 @@ export const sellerPaths = [
   },
   {
     path: "inventory",
-    element: <Inventory />,
+    element: <SellerInventory />,
   },
 ];

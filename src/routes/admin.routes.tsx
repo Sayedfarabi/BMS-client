@@ -1,4 +1,5 @@
 import AdminDashboard from "../pages/admin/AdminDashboard";
+import AdminInventory from "../pages/admin/AdminInventory";
 import CreateProduct from "../pages/admin/CreateProduct";
 import CreateSeller from "../pages/admin/CreateSeller";
 // import BuyerDashboard from "../pages/buyer/BuyerDashboard";
@@ -70,6 +71,10 @@ export const adminPaths = [
   {
     path: "create-product",
     element: <CreateProduct />,
+  },
+  {
+    path: "inventory",
+    element: <AdminInventory />,
   },
   {
     path: "create-seller",
