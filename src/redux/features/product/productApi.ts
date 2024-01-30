@@ -15,9 +15,12 @@ const createProductApi = baseApi.injectEndpoints({
       },
     }),
     products: builder.query({
-      query: () => {
+      query: (queries) => {
+        console.log(queries);
+
         return {
-          url: "/inventory/",
+          url: `/inventory?${queries}`,
+          method: "GET",
         };
       },
     }),
