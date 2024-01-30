@@ -49,8 +49,8 @@ const CreateProduct = () => {
 
           <div style={{ margin: "24px 0px" }}>
             <BMSForm onSubmit={onSubmit} btn={"Create Product"}>
-              <Row gutter={24}>
-                <Col span={24}>
+              <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 28 }}>
+                <Col className="gutter-row" span={24}>
                   <BMSSelect
                     name="type"
                     label="Select type"
@@ -58,10 +58,13 @@ const CreateProduct = () => {
                     isRequired
                   />
                 </Col>
-              </Row>
-
-              <Row gutter={24}>
-                <Col span={8}>
+                <Col
+                  className="gutter-row"
+                  xs={{ span: 24 }}
+                  sm={{ span: 16 }}
+                  md={{ span: 12 }}
+                  lg={{ span: 8 }}
+                >
                   <BMSInput
                     name={"name"}
                     type={"text"}
@@ -70,7 +73,14 @@ const CreateProduct = () => {
                   />
                 </Col>
 
-                <Col span={8}>
+                <Col
+                  className="gutter-row"
+                  xs={{ span: 24 }}
+                  sm={{ span: 16 }}
+                  md={{ span: 12 }}
+                  lg={{ span: 8 }}
+                  // span={8}
+                >
                   <BMSInput
                     name={"brand"}
                     type={"text"}
@@ -79,7 +89,14 @@ const CreateProduct = () => {
                   />
                 </Col>
 
-                <Col span={8}>
+                <Col
+                  className="gutter-row"
+                  xs={{ span: 24 }}
+                  sm={{ span: 16 }}
+                  md={{ span: 12 }}
+                  lg={{ span: 8 }}
+                  // span={8}
+                >
                   <BMSInput
                     name={"model"}
                     type={"text"}
@@ -87,10 +104,14 @@ const CreateProduct = () => {
                     isRequired
                   />
                 </Col>
-              </Row>
-
-              <Row gutter={24}>
-                <Col span={8}>
+                <Col
+                  className="gutter-row"
+                  xs={{ span: 24 }}
+                  sm={{ span: 16 }}
+                  md={{ span: 12 }}
+                  lg={{ span: 8 }}
+                  // span={8}
+                >
                   <BMSInput
                     name={"size"}
                     type={"text"}
@@ -99,7 +120,14 @@ const CreateProduct = () => {
                   />
                 </Col>
 
-                <Col span={8}>
+                <Col
+                  className="gutter-row"
+                  xs={{ span: 24 }}
+                  sm={{ span: 16 }}
+                  md={{ span: 12 }}
+                  lg={{ span: 8 }}
+                  // span={8}
+                >
                   <BMSInput
                     name={"price"}
                     type={"number"}
@@ -108,7 +136,14 @@ const CreateProduct = () => {
                   />
                 </Col>
 
-                <Col span={8}>
+                <Col
+                  className="gutter-row"
+                  xs={{ span: 24 }}
+                  sm={{ span: 16 }}
+                  md={{ span: 12 }}
+                  lg={{ span: 8 }}
+                  // span={8}
+                >
                   <BMSInput
                     name={"quantity"}
                     type={"number"}
@@ -116,10 +151,14 @@ const CreateProduct = () => {
                     isRequired="required"
                   />
                 </Col>
-              </Row>
-
-              <Row gutter={24}>
-                <Col span={8}>
+                <Col
+                  className="gutter-row"
+                  xs={{ span: 24 }}
+                  sm={{ span: 16 }}
+                  md={{ span: 12 }}
+                  lg={{ span: 8 }}
+                  // span={8}
+                >
                   <BMSInput
                     name={"color"}
                     type={"text"}
@@ -128,7 +167,14 @@ const CreateProduct = () => {
                   />
                 </Col>
 
-                <Col span={8}>
+                <Col
+                  className="gutter-row"
+                  xs={{ span: 24 }}
+                  sm={{ span: 16 }}
+                  md={{ span: 12 }}
+                  lg={{ span: 8 }}
+                  // span={8}
+                >
                   <BMSInput
                     name={"frameMaterial"}
                     type={"text"}
@@ -137,7 +183,14 @@ const CreateProduct = () => {
                   />
                 </Col>
 
-                <Col span={8}>
+                <Col
+                  className="gutter-row"
+                  xs={{ span: 24 }}
+                  sm={{ span: 16 }}
+                  md={{ span: 12 }}
+                  lg={{ span: 8 }}
+                  // span={8}
+                >
                   <BMSInput
                     name={"suspensionType"}
                     type={"text"}
@@ -145,10 +198,14 @@ const CreateProduct = () => {
                     isRequired
                   />
                 </Col>
-              </Row>
-
-              <Row gutter={24}>
-                <Col span={8}>
+                <Col
+                  className="gutter-row"
+                  xs={{ span: 24 }}
+                  sm={{ span: 24 }}
+                  md={{ span: 12 }}
+                  lg={{ span: 8 }}
+                  // span={8}
+                >
                   <BMSInput
                     name={"releaseDate"}
                     type={"date"}
@@ -157,7 +214,14 @@ const CreateProduct = () => {
                   />
                 </Col>
 
-                <Col span={16}>
+                <Col
+                  className="gutter-row"
+                  xs={{ span: 24 }}
+                  sm={{ span: 24 }}
+                  md={{ span: 24 }}
+                  lg={{ span: 16 }}
+                  // span={16}
+                >
                   <BMSInput
                     name={"image"}
                     type={"text"}
@@ -166,6 +230,14 @@ const CreateProduct = () => {
                   />
                 </Col>
               </Row>
+
+              {/* <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 28 }}></Row> */}
+
+              {/* <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 28 }}></Row> */}
+
+              {/* <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 28 }}></Row> */}
+
+              {/* <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 28 }}></Row> */}
             </BMSForm>
           </div>
         </div>
