@@ -1,10 +1,20 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Col, Row } from "antd";
 import BMSForm from "../../components/form/BMSForm";
 import BMSInput from "../../components/form/BMSInput";
 import { FieldValues } from "react-hook-form";
 import BMSSelect, { TSelectOption } from "../../components/form/BMSSelect";
+import { useCreateProductMutation } from "../../redux/features/product/productApi";
+import Loading from "../Loading";
+import { toast } from "sonner";
 
 const CreateProduct = () => {
+  const [createProduct, { isLoading }] = useCreateProductMutation();
+
+  if (isLoading) {
+    <Loading color="white" />;
+  }
+
   const typeOptions: TSelectOption[] = [
     { value: "Road", label: "Road" },
     { value: "Mountain", label: "Mountain" },
@@ -12,8 +22,24 @@ const CreateProduct = () => {
     { value: "Other", label: "Other", disabled: false },
   ];
 
-  const onSubmit = (data: FieldValues) => {
-    console.log(data);
+  const onSubmit = async (data: FieldValues) => {
+    const toastId = toast.loading("Creating product...");
+    try {
+      data.price = parseFloat(data.price);
+      data.quantity = parseFloat(data.quantity);
+
+      const res = await createProduct(data).unwrap();
+      toast.success(res.message, { id: toastId, duration: 2000 });
+    } catch (error: any) {
+      toast.error(
+        error.data?.message ? error.data?.message : "Something went wrong!",
+        {
+          id: toastId,
+          duration: 2000,
+        }
+      );
+      console.log(error);
+    }
   };
 
   return (
@@ -230,14 +256,6 @@ const CreateProduct = () => {
                   />
                 </Col>
               </Row>
-
-              {/* <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 28 }}></Row> */}
-
-              {/* <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 28 }}></Row> */}
-
-              {/* <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 28 }}></Row> */}
-
-              {/* <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 28 }}></Row> */}
             </BMSForm>
           </div>
         </div>

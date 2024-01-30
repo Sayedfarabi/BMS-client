@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // import { useAppDispatch } from "./../hooks";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { RootState } from "../store";
-// import { logout } from "../features/auth/authSlice";
+import { logout } from "../features/auth/authSlice";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: "http://localhost:5000/api/v1",
@@ -16,22 +17,26 @@ const baseQuery = fetchBaseQuery({
   },
 });
 
-// // customs base query
-// const baseQueryWithAccessToken = async (args, api, extraOptions) => {
-//   const result = await baseQuery(args, api, extraOptions);
-//   // console.log(result);
+// customs base query
+const baseQueryWithAccessToken = async (
+  args: any,
+  api: any,
+  extraOptions: any
+) => {
+  const result = await baseQuery(args, api, extraOptions);
+  // console.log(result);
 
-//   if (result.error?.status === 401) {
-//     api.dispatch(logout());
+  if (result.error?.status === 401) {
+    api.dispatch(logout());
 
-//     // result = await baseQuery(args, api, extraOptions);
-//   }
-//   return result;
-// };
+    // result = await baseQuery(args, api, extraOptions);
+  }
+  return result;
+};
 
 export const baseApi = createApi({
   reducerPath: "baseApi",
-  baseQuery: baseQuery,
-  // baseQuery: baseQueryWithAccessToken,
+  // baseQuery: baseQuery,
+  baseQuery: baseQueryWithAccessToken,
   endpoints: () => ({}),
 });
