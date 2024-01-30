@@ -1,21 +1,20 @@
-import { Radio } from "antd";
+import { Select } from "antd";
 import { Controller, useFormContext } from "react-hook-form";
+
+export type TSelectOption = {
+  value: string;
+  label: string;
+  disabled?: boolean;
+};
 
 type TInputProps = {
   name: string;
   label?: string;
-  textColor: string;
-  options: Array<string>;
+  options: Array<TSelectOption>;
   isRequired: boolean | string;
 };
 
-const BMSRadio = ({
-  name,
-  label,
-  isRequired,
-  textColor,
-  options,
-}: TInputProps) => {
+const BMSSelect = ({ name, label, options, isRequired }: TInputProps) => {
   const {
     formState: { errors },
   } = useFormContext();
@@ -24,7 +23,11 @@ const BMSRadio = ({
     <div style={{ marginBottom: "20px" }}>
       {label ? (
         <label
-          style={{ marginBottom: "4px", display: "block", fontWeight: "bold" }}
+          style={{
+            marginBottom: "4px",
+            display: "block",
+            fontWeight: "bold",
+          }}
         >
           {label} :
         </label>
@@ -36,15 +39,12 @@ const BMSRadio = ({
           return (
             <div>
               {/* <Input {...field} type={type} name={name} id={name} /> */}
-              <Radio.Group {...field} name={name} id={name}>
-                {options.map((item) => {
-                  return (
-                    <Radio key={item} style={{ color: textColor }} value={item}>
-                      {item}
-                    </Radio>
-                  );
-                })}
-              </Radio.Group>
+              <Select
+                placeholder="Select a person"
+                style={{ width: "100%" }}
+                {...field}
+                options={options}
+              />
               {errors[name] && (
                 <p style={{ color: "red", fontSize: "12px" }}>{isRequired}</p>
               )}
@@ -56,4 +56,4 @@ const BMSRadio = ({
   );
 };
 
-export default BMSRadio;
+export default BMSSelect;

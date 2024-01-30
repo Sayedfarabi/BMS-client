@@ -29,7 +29,7 @@ const BMSInput = ({ name, label, type, isRequired }: TInputProps) => {
             <>
               <Input {...field} type={type} name={name} id={name} />
               {errors[name] && (
-                <p style={{ color: "red", fontSize: "12px" }}>{isRequired}</p>
+                <p style={{ color: "red", fontSize: "12px" }}>Required</p>
               )}
             </>
           );

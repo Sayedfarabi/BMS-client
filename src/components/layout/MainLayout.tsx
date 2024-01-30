@@ -149,7 +149,13 @@ const MainLayout = () => {
             </div>
           </div>
         </Header>
-        <Content style={{ margin: "24px 16px 0" }}>
+        <Content
+          style={{
+            margin: "24px 16px 0",
+            overflowX: "auto",
+            overflowY: "auto",
+          }}
+        >
           <div
             style={{
               padding: 24,
