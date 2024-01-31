@@ -10,7 +10,7 @@ const AdminProductTable = () => {
   const [queryParam, setQueryParam] = useState("");
 
   const { data, isLoading } = useProductsQuery(queryParam);
-
+  const adminInventory = data?.data?.result;
   if (isLoading) {
     return <Loading color="black" />;
   }
@@ -40,52 +40,37 @@ const AdminProductTable = () => {
     {
       title: "Image",
       dataIndex: "image",
-      key: "image",
+      key: "adminImage",
       render: (text) => <Avatar src={text} size="large" alt="product" />,
     },
     {
       title: "Name",
       dataIndex: "name",
-      key: "name",
+      key: "adminProductName",
     },
     {
       title: "Type",
       dataIndex: "type",
-      key: "type",
+      key: "adminType",
     },
     {
       title: "Brand",
-      key: "brand",
       dataIndex: "brand",
-      // render: (_, { tags }) => (
-      //   <>
-      //     {tags.map((tag) => {
-      //       let color = tag.length > 5 ? "geekblue" : "green";
-      //       if (tag === "loser") {
-      //         color = "volcano";
-      //       }
-      //       return (
-      //         <Tag color={color} key={tag}>
-      //           {tag.toUpperCase()}
-      //         </Tag>
-      //       );
-      //     })}
-      //   </>
-      // ),
+      key: "adminBrand",
     },
     {
       title: "Quantity",
       dataIndex: "quantity",
-      key: "quantity",
+      key: "adminQuantity",
     },
     {
       title: "Price",
       dataIndex: "price",
-      key: "price",
+      key: "adminPrice",
     },
     {
       title: "Action",
-      key: "action",
+      key: "adminAction",
       render: () => (
         <Space size="middle">
           {/* <a>Invite {record.name}</a> */}
@@ -136,13 +121,13 @@ const AdminProductTable = () => {
     },
   ];
 
-  console.log(data);
+  // console.log(data);
   return (
     <div>
       <div>
         <ProductFilter />
       </div>
-      <Table columns={columns} dataSource={data.data.result} />
+      <Table columns={columns} dataSource={adminInventory} />
     </div>
   );
 };

@@ -10,7 +10,13 @@ const sellApi = baseApi.injectEndpoints({
         body: payload?.sellData,
       }),
     }),
+    getSellHistory: builder.query({
+      query: (queries) => ({
+        url: `/sales/history/${queries}`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
-export const { useCreateSellMutation } = sellApi;
+export const { useCreateSellMutation, useGetSellHistoryQuery } = sellApi;
