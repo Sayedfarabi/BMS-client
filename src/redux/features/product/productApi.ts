@@ -24,7 +24,22 @@ const createProductApi = baseApi.injectEndpoints({
         };
       },
     }),
+    deleteProduct: builder.mutation({
+      query: (id) => {
+        if (!id) {
+          throw new Error("Invalid product data provided");
+        }
+        return {
+          url: `/inventory/${id}`,
+          method: "DELETE",
+        };
+      },
+    }),
   }),
 });
 
-export const { useCreateProductMutation, useProductsQuery } = createProductApi;
+export const {
+  useCreateProductMutation,
+  useProductsQuery,
+  useDeleteProductMutation,
+} = createProductApi;

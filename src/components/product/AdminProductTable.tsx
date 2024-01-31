@@ -1,19 +1,54 @@
-import { Avatar, Space, Table } from "antd";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Avatar, Col, Input, Modal, Row, Space, Table } from "antd";
 import type { TableProps } from "antd";
 
-import { useProductsQuery } from "../../redux/features/product/productApi";
+import {
+  useDeleteProductMutation,
+  useProductsQuery,
+} from "../../redux/features/product/productApi";
 import Loading from "../../pages/Loading";
-import { useState } from "react";
 import ProductFilter from "./ProductFilter";
+import { useState } from "react";
+import { toast } from "sonner";
 
 const AdminProductTable = () => {
-  const [queryParam, setQueryParam] = useState("");
-
-  const { data, isLoading } = useProductsQuery(queryParam);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { data, isLoading: fetchIsLoading } = useProductsQuery("", {
+    pollingInterval: 1000,
+  });
+  const [deleteProduct, { isLoading: deleteIsLoading }] =
+    useDeleteProductMutation();
   const adminInventory = data?.data?.result;
-  if (isLoading) {
+
+  if (fetchIsLoading || deleteIsLoading) {
     return <Loading color="black" />;
   }
+
+  // Fn
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleOk = async () => {
+    setIsModalOpen(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
+  const deleteHandler = async (id: string) => {
+    const toastId = toast.loading("Product deleting...");
+    try {
+      const res = await deleteProduct(id).unwrap();
+      toast.success(res.message, { id: toastId, duration: 2000 });
+      // console.log(res);
+    } catch (error: any) {
+      console.log(error);
+      toast.error(error.message, { id: toastId, duration: 2000 });
+    }
+  };
 
   interface DataType {
     _id: string;
@@ -71,10 +106,9 @@ const AdminProductTable = () => {
     {
       title: "Action",
       key: "adminAction",
-      render: () => (
+      render: (_: any, record: DataType) => (
         <Space size="middle">
-          {/* <a>Invite {record.name}</a> */}
-          <button onClick={() => setQueryParam("name=Mo")}>
+          <button onClick={() => showModal()}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -95,7 +129,7 @@ const AdminProductTable = () => {
               />
             </svg>
           </button>
-          <button>
+          <button onClick={() => deleteHandler(record._id)}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -128,6 +162,16 @@ const AdminProductTable = () => {
         <ProductFilter />
       </div>
       <Table columns={columns} dataSource={adminInventory} />
+      <Modal
+        title="Update Product"
+        open={isModalOpen}
+        onOk={handleOk}
+        onCancel={handleCancel}
+      >
+        <div>
+          <p style={{ color: "red" }}>This feature coming soon...</p>
+        </div>
+      </Modal>
     </div>
   );
 };
