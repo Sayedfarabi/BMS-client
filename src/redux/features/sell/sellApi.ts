@@ -9,12 +9,14 @@ const sellApi = baseApi.injectEndpoints({
         method: "POST",
         body: payload?.sellData,
       }),
+      invalidatesTags: ["sell"],
     }),
     getSellHistory: builder.query({
       query: (queries) => ({
         url: `/sales/history/${queries}`,
         method: "GET",
       }),
+      providesTags: ["sell"],
     }),
   }),
 });

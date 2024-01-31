@@ -13,6 +13,7 @@ const createProductApi = baseApi.injectEndpoints({
           body: productData,
         };
       },
+      invalidatesTags: ["sell"],
     }),
     products: builder.query({
       query: (queries) => {
@@ -23,6 +24,7 @@ const createProductApi = baseApi.injectEndpoints({
           method: "GET",
         };
       },
+      providesTags: ["sell"],
     }),
     deleteProduct: builder.mutation({
       query: (id) => {
@@ -34,6 +36,7 @@ const createProductApi = baseApi.injectEndpoints({
           method: "DELETE",
         };
       },
+      invalidatesTags: ["sell"],
     }),
   }),
 });
