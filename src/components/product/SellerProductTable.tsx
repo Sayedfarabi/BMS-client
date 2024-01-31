@@ -21,12 +21,7 @@ const SellerProductTable = () => {
   const dispatch = useAppDispatch();
   const sellData = useAppSelector((state) => state.sell);
   const [createSell] = useCreateSellMutation();
-  const { data, isLoading } = useProductsQuery(undefined, {
-    pollingInterval: 1000,
-    refetchOnMountOrArgChange: true,
-    refetchOnReconnect: true,
-    // refetchOnFocus: true,
-  });
+  const { data, isLoading } = useProductsQuery(undefined);
 
   // Fn
   const showModal = (productData: any) => {

@@ -14,9 +14,7 @@ import { toast } from "sonner";
 
 const AdminProductTable = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { data, isLoading: fetchIsLoading } = useProductsQuery("", {
-    pollingInterval: 1000,
-  });
+  const { data, isLoading: fetchIsLoading } = useProductsQuery("");
   const [deleteProduct, { isLoading: deleteIsLoading }] =
     useDeleteProductMutation();
   const adminInventory = data?.data?.result;

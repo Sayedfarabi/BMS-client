@@ -11,9 +11,7 @@ const AdminDashboard = () => {
 
   console.log(queryParam);
 
-  const { data, isLoading } = useGetSellHistoryQuery(queryParam, {
-    pollingInterval: 1000,
-  });
+  const { data, isLoading } = useGetSellHistoryQuery(queryParam);
   const historyData = data?.data?.data;
 
   if (isLoading) {

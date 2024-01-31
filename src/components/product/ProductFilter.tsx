@@ -1,6 +1,23 @@
-import { Col, Input, Row } from "antd";
+import { Col, Input, Row, Select } from "antd";
+// import { useState } from "react";
+// import { useSearchParams } from "react-router-dom";
 
 const ProductFilter = () => {
+  // let queryParam = "";
+
+  // const [searchParam, setSearchParam] = useSearchParams();
+  // const [name, setName]=useState(null)
+  // const [price, setPrice]=useState(null)
+  // const [brand, setBrand]=useState(null)
+  // const [model, setModel]=useState(null)
+  // const [type, setType]=useState(null)
+  // const [size, setSize]=useState(null)
+  // const [color, setColor]=useState(null)
+  // const [frameMaterial, setFrameMaterial]=useState(null)
+
+  // const brandParam = selectedBrand.join("&brand=");
+  // queryParam += `${queryParam ? "&" : ""}brand=${brandParam}`;
+
   return (
     <section
       style={{
@@ -42,7 +59,7 @@ const ProductFilter = () => {
               md={{ span: 3 }}
               lg={{ span: 3 }}
             >
-              <Input placeholder="Brand" />
+              <Input type="text" placeholder="Brand" />
             </Col>
 
             <Col
@@ -62,7 +79,17 @@ const ProductFilter = () => {
               md={{ span: 3 }}
               lg={{ span: 3 }}
             >
-              <Input placeholder="Type" />
+              <Select
+                defaultValue="Select"
+                style={{ width: 120 }}
+                // onChange={handleChange}
+                options={[
+                  { value: "Road", label: "Road" },
+                  { value: "Mountain", label: "Mountain" },
+                  { value: "Hybrid", label: "Hybrid" },
+                  { value: "Other", label: "Other" },
+                ]}
+              />
             </Col>
 
             <Col

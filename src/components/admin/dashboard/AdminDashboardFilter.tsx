@@ -8,22 +8,6 @@ type props = {
 };
 
 const AdminDashboardFilter = ({ setQueryParam }: props) => {
-  const dailyQueryHandler = () => {
-    const today = new Date();
-    const dateNumber = today.getDate();
-    const monthNumber = today.getMonth() + 1;
-    const year = today.getFullYear().toString();
-
-    const date = dateNumber.toString();
-    const month = monthNumber.toString();
-
-    const queryStr = `?startDate=${year}-${
-      month.length === 1 ? "0" + month : month
-    }-${date.length === 1 ? "0" + date : date}`;
-
-    setQueryParam(queryStr);
-  };
-
   const timeHandler = (day: number) => {
     // date calculation
     const today = new Date();
