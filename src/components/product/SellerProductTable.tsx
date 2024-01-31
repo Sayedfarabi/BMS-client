@@ -1,11 +1,57 @@
-import { Avatar, Button, Space, Table } from "antd";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Avatar, Button, Col, Input, Modal, Row, Space, Table } from "antd";
 import type { TableProps } from "antd";
-
 import { useProductsQuery } from "../../redux/features/product/productApi";
 import Loading from "../../pages/Loading";
+import { useState } from "react";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import {
+  removeSell,
+  setBuyer,
+  setDate,
+  setProductId,
+  setQuantity,
+} from "../../redux/features/sell/sellSlice";
+import { useCreateSellMutation } from "../../redux/features/sell/sellApi";
+import { toast } from "sonner";
 
 const SellerProductTable = () => {
-  const { data, isLoading } = useProductsQuery("");
+  // hooks
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const dispatch = useAppDispatch();
+  const sellData = useAppSelector((state) => state.sell);
+  const [createSell] = useCreateSellMutation();
+  const { data, isLoading } = useProductsQuery(undefined, {
+    pollingInterval: 1000,
+    refetchOnMountOrArgChange: true,
+    refetchOnReconnect: true,
+    // refetchOnFocus: true,
+  });
+
+  // Fn
+  const showModal = (productData: any) => {
+    dispatch(setProductId(productData?._id));
+    setIsModalOpen(true);
+  };
+
+  const handleOk = async () => {
+    const toastId = toast.loading("Make selling...");
+    try {
+      const res = await createSell(sellData).unwrap();
+      console.log(res);
+      dispatch(removeSell());
+      setIsModalOpen(false);
+      toast.success(res.message, { id: toastId, duration: 2000 });
+    } catch (error) {
+      toast.error("Somethig went wrong!", { id: toastId, duration: 2000 });
+      console.log(error);
+    }
+  };
+
+  const handleCancel = () => {
+    dispatch(removeSell());
+    setIsModalOpen(false);
+  };
 
   if (isLoading) {
     return <Loading color="black" />;
@@ -37,9 +83,7 @@ const SellerProductTable = () => {
       title: "Image",
       dataIndex: "image",
       key: "image",
-      render: (text) => (
-        <Avatar src={text} size="large" icon={text} alt="product" />
-      ),
+      render: (text) => <Avatar src={text} size="large" alt="product" />,
     },
     {
       title: "Name",
@@ -55,21 +99,6 @@ const SellerProductTable = () => {
       title: "Brand",
       key: "brand",
       dataIndex: "brand",
-      // render: (_, { tags }) => (
-      //   <>
-      //     {tags.map((tag) => {
-      //       let color = tag.length > 5 ? "geekblue" : "green";
-      //       if (tag === "loser") {
-      //         color = "volcano";
-      //       }
-      //       return (
-      //         <Tag color={color} key={tag}>
-      //           {tag.toUpperCase()}
-      //         </Tag>
-      //       );
-      //     })}
-      //   </>
-      // ),
     },
     {
       title: "Quantity",
@@ -84,19 +113,60 @@ const SellerProductTable = () => {
     {
       title: "Action",
       key: "action",
-      render: () => (
+      render: (_: any, record: DataType) => (
         <Space size="middle">
-          {/* <a>Invite {record.name}</a> */}
-          <Button type="primary">Sell</Button>
+          <Button onClick={() => showModal(record)} type="primary">
+            Sell
+          </Button>
         </Space>
       ),
     },
   ];
 
-  console.log(data);
+  // console.log(data);
   return (
     <div>
-      <Table columns={columns} dataSource={data.data.result} />
+      <Table columns={columns} dataSource={data.data?.result} />
+      <Modal
+        title="Product Sell"
+        open={isModalOpen}
+        onOk={handleOk}
+        onCancel={handleCancel}
+      >
+        <div>
+          <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 28 }}>
+            <Col span={24}>
+              <Input
+                onChange={(e) => dispatch(setBuyer(e.target?.value))}
+                type="text"
+                placeholder="Buyer name"
+                required
+              />
+              ;
+            </Col>
+
+            <Col span={24}>
+              <Input
+                onChange={(e) => dispatch(setQuantity(e.target?.value))}
+                type="number"
+                placeholder="Product quantity"
+                required
+              />
+              ;
+            </Col>
+
+            <Col span={24}>
+              <Input
+                onChange={(e) => dispatch(setDate(e.target?.value))}
+                type="date"
+                placeholder="Date of sale"
+                required
+              />
+              ;
+            </Col>
+          </Row>
+        </div>
+      </Modal>
     </div>
   );
 };

@@ -1,6 +1,5 @@
 import { Avatar, Space, Table } from "antd";
 import type { TableProps } from "antd";
-
 import { useProductsQuery } from "../../redux/features/product/productApi";
 import Loading from "../../pages/Loading";
 

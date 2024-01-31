@@ -24,7 +24,7 @@ const ProductFilter = () => {
               md={{ span: 3 }}
               lg={{ span: 3 }}
             >
-              <Input placeholder="Product name" />
+              <Input placeholder="Name" />
             </Col>
             <Col
               className="gutter-row"
@@ -33,7 +33,7 @@ const ProductFilter = () => {
               md={{ span: 3 }}
               lg={{ span: 3 }}
             >
-              <Input placeholder="Release date" />
+              <Input placeholder="Date" />
             </Col>
             <Col
               className="gutter-row"
@@ -92,7 +92,7 @@ const ProductFilter = () => {
               md={{ span: 3 }}
               lg={{ span: 3 }}
             >
-              <Input placeholder="Frame Material" />
+              <Input placeholder="Frame" />
             </Col>
           </Row>
         </div>

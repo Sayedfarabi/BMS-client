@@ -20,6 +20,10 @@ const sidebarItems: MenuProps["items"] = [
     label: "Admin Management",
     children: [
       {
+        key: "Admin Dashboard",
+        label: <NavLink to={"/admin/dashboard"}>Dashboard</NavLink>,
+      },
+      {
         key: "Create Product",
         label: <NavLink to={"/admin/create-product"}>Create Product</NavLink>,
       },
