@@ -153,7 +153,6 @@ const AdminProductTable = () => {
     },
   ];
 
-  // console.log(data);
   return (
     <div>
       <div>
