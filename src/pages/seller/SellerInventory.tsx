@@ -5,7 +5,9 @@ const SellerInventory = () => {
   return (
     <div>
       <ProductFilter />
-      <SellerProductTable />
+      <div style={{ margin: "60px 0px" }}>
+        <SellerProductTable />
+      </div>
     </div>
   );
 };

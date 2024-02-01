@@ -18,10 +18,7 @@ const Login = () => {
     console.log({ error });
   }
 
-  const defaultValue = {
-    email: "abu.sayed123@gmail.com",
-    password: "securePassword123",
-  };
+  const defaultValue = {};
 
   const onSubmit = async (data: FieldValues) => {
     const toastId = toast.loading("Logging in...");

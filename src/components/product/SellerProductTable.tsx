@@ -132,32 +132,32 @@ const SellerProductTable = () => {
           <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 28 }}>
             <Col span={24}>
               <Input
+                style={{ margin: "12px 0px" }}
                 onChange={(e) => dispatch(setBuyer(e.target?.value))}
                 type="text"
                 placeholder="Buyer name"
                 required
               />
-              ;
             </Col>
 
             <Col span={24}>
               <Input
+                style={{ margin: "12px 0px" }}
                 onChange={(e) => dispatch(setQuantity(e.target?.value))}
                 type="number"
                 placeholder="Product quantity"
                 required
               />
-              ;
             </Col>
 
             <Col span={24}>
               <Input
+                style={{ margin: "12px 0px" }}
                 onChange={(e) => dispatch(setDate(e.target?.value))}
                 type="date"
                 placeholder="Date of sale"
                 required
               />
-              ;
             </Col>
           </Row>
         </div>
